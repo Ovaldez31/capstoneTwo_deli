@@ -1,0 +1,34 @@
+DELI-cious Order Receipt
+-------------------------
+Customer: orchid
+
+Item #1
+Sandwich:
+ - Bread: WHITE
+ - Meat: HAM (Extra)
+ - Cheese: AMERICAN (Extra)
+ - Toasted: Yes
+ - Toppings: [LETTUCE, PEPPERS, TOMATOES, PICKLES]
+ - Sauces: [MAYO, MUSTARD, KETCHUP]
+ - Price: $12.10
+
+Item #2
+Drink
+Size: SMALL
+Flavor: 2
+Price: $2.00
+
+Item #3
+Drink
+Size: SMALL
+Flavor: 3
+Price: $2.00
+
+Item #4
+Chips: Plain - $1.50
+
+Item #5
+Chips: BBQ - $1.50
+
+-------------------------
+Total: $19.10

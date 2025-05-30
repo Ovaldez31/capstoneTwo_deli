@@ -8,7 +8,6 @@ public class UserInterface {
     private final Scanner scanner = new Scanner(System.in);
     private Order order;
 
-
     public UserInterface() {
         init();
     }
@@ -128,7 +127,6 @@ public class UserInterface {
         }
         while (input != 0);
 
-
     }
 
     private void addDrinkMenu() {
@@ -148,7 +146,7 @@ public class UserInterface {
             default -> "Invalid choice.";
         };
 
-        System.out.print("Select drink flavor:");
+        System.out.print("Select drink flavor: ");
         System.out.println("1) COLA");
         System.out.println("2) SPRITE");
         System.out.println("3) GRAPE");
@@ -187,17 +185,226 @@ public class UserInterface {
     }
 
     private void customizeSandwichMenu() {
-        Sandwich.Size currentSize = Sandwich.Size.SMALL;
-        Sandwich.BreadType currentSandwichBreadType = Sandwich.BreadType.WHITE;
-        Sandwich.MeatOption currentSandwichMeat = Sandwich.MeatOption.CHICKEN;
+
+        Sandwich.Size currentSize = null;
+        Sandwich.BreadType currentSandwichBreadType = null;
+        Sandwich.MeatOption currentSandwichMeat = null;
+        Sandwich.CheeseOption currentSandwichCheese = null;
+
         boolean currentSandwichExtraMeat = false;
-        Sandwich.CheeseOption currentSandwichCheese = Sandwich.CheeseOption.AMERICAN;
         boolean currentSandwichExtraCheese = false;
         boolean currentSandwichToasted = false;
 
-        ArrayList<Sandwich.RegularTopping> regularToppings = new ArrayList<>();
-        ArrayList<Sandwich.SauceOption> sauces = new ArrayList<>();
+        ArrayList<Sandwich.RegularTopping> toppings = new ArrayList<>();
+        ArrayList<Sandwich.SauceOption> saucesOption = new ArrayList<>();
 
+        System.out.println("Choose size: 1) SMALL  2) MEDIUM  3) LARGE  0) Go Back");
+        int sizeChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (sizeChoice == 0) {
+            System.out.println("Going back...");
+            return; // exits the customizeSandwichMenu() method
+        } else if (sizeChoice == 1) {
+            currentSize = Sandwich.Size.SMALL;
+        } else if (sizeChoice == 2) {
+            currentSize = Sandwich.Size.MEDIUM;
+        } else if (sizeChoice == 3) {
+            currentSize = Sandwich.Size.LARGE;
+        } else {
+            System.out.println("Invalid size choice.");
+
+        }
+
+        System.out.println("Choose bread: 1) WHITE  2)WHEAT  3)RYE  4)WRAP  0) Go Back");
+        int breadChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (breadChoice == 0) {
+            System.out.println("Going back...");
+            return;
+        } else if (breadChoice == 1) {
+            currentSandwichBreadType = Sandwich.BreadType.WHITE;
+        } else if (breadChoice == 2) {
+            currentSandwichBreadType = Sandwich.BreadType.WHEAT;
+        } else if (breadChoice == 3) {
+            currentSandwichBreadType = Sandwich.BreadType.RYE;
+        } else if (breadChoice == 4) {
+            currentSandwichBreadType = Sandwich.BreadType.WRAP;
+        } else {
+            System.out.println("Invalid bread choice.");
+            return;
+        }
+
+        System.out.println("Choose meat: 1) STEAK  2) HAM  3) SALAMI  4) ROASTED BEEF  5) CHICKEN  6) BACON  0) Go Back");
+        int meatChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (meatChoice == 1) {
+            currentSandwichMeat = Sandwich.MeatOption.STEAK;
+        } else if (meatChoice == 2) {
+            currentSandwichMeat = Sandwich.MeatOption.HAM;
+        } else if (meatChoice == 3) {
+            currentSandwichMeat = Sandwich.MeatOption.SALAMI;
+        } else if (meatChoice == 4) {
+            currentSandwichMeat = Sandwich.MeatOption.ROAST_BEEF;
+        } else if (meatChoice == 5) {
+            currentSandwichMeat = Sandwich.MeatOption.CHICKEN;
+        } else if (meatChoice == 6) {
+            currentSandwichMeat = Sandwich.MeatOption.BACON;
+        } else if (meatChoice == 0) {
+            System.out.println("Going back...");
+            return;
+        } else {
+            System.out.println("Invalid meat choice.");
+            return;
+        }
+
+        String extraMeatInput;
+
+        do {
+            System.out.println("Add extra meat? (yes/no): ");
+            extraMeatInput = scanner.nextLine().trim().toLowerCase();
+
+            if (!extraMeatInput.equals("yes") && !extraMeatInput.equals("no")) {
+                System.out.println("Please enter 'yes' or 'no'.");
+            }
+        } while (!extraMeatInput.equals("yes") && !extraMeatInput.equals("no"));
+
+        currentSandwichExtraMeat = extraMeatInput.equals("yes");
+
+        if (currentSandwichExtraMeat) {
+            System.out.println("Choose an additional meat: 1) STEAK  2) HAM  3) SALAMI  4) ROASTED BEEF  5) CHICKEN  6) BACON  0) Go Back");
+            int extraMeatChoice = scanner.nextInt();
+            scanner.nextLine();
+            if (extraMeatChoice == 0) {
+                System.out.println("Going back...");
+                return;
+            }
+        }
+        System.out.println("Choose cheese: 1) AMERICAN  2) PROVOLONE  3) CHEDDAR  4) SWISS  5) No Cheese");
+        int cheeseChoice = scanner.nextInt();
+        scanner.nextLine();
+        currentSandwichCheese = switch (cheeseChoice) {
+            case 1 -> Sandwich.CheeseOption.AMERICAN;
+            case 2 -> Sandwich.CheeseOption.PROVOLONE;
+            case 3 -> Sandwich.CheeseOption.CHEDDAR;
+            case 4 -> Sandwich.CheeseOption.SWISS;
+            case 5 -> null;
+            default -> {
+                System.out.println("Invalid cheese choice.");
+                yield null;
+            }
+        };
+
+        String extraCheeseInput;
+
+        do {
+            System.out.println("Add extra cheese? (yes/no): ");
+            extraCheeseInput = scanner.nextLine().trim().toLowerCase();
+
+            if (!extraCheeseInput.equals("yes") && !extraCheeseInput.equals("no")) {
+                System.out.println("Please enter 'yes' or 'no'.");
+            }
+        } while (!extraCheeseInput.equals("yes") && !extraCheeseInput.equals("no"));
+
+        currentSandwichExtraCheese = extraCheeseInput.equals("yes");
+
+        if (currentSandwichExtraCheese) {
+            System.out.println("Choose an additional cheese: 1) AMERICAN  2) PROVOLONE  3) CHEDDAR  4) SWISS  0) Go Back");
+            int extraCheeseChoice = scanner.nextInt();
+            scanner.nextLine();
+
+            if (extraCheeseChoice == 0) {
+                System.out.println("Going back...");
+                return;
+            }
+        }
+
+        String toastedInput;
+        do {
+            System.out.println("Would you like it toasted? (yes/no or 0 to go back): ");
+            toastedInput = scanner.nextLine().trim().toLowerCase();
+
+            if (toastedInput.equals("0")) {
+                System.out.println("Going back...");
+                return;
+            }
+
+            if (!toastedInput.equals("yes") && !toastedInput.equals("no")) {
+                System.out.println("Please enter 'yes', 'no', or '0' to go back.");
+            }
+        } while (!toastedInput.equals("yes") && !toastedInput.equals("no"));
+
+        currentSandwichToasted = toastedInput.equals("yes");
+
+        System.out.println("Choose toppings: 1)LETTUCE  2)PEPPERS  3)ONIONS  4)TOMATOES  5)JALAPENOS " +
+                " 6)CUCUMBERS  7)PICKLES  8)GUACAMOLE  9)MUSHROOMS");
+        System.out.println("Enter 0 to stop adding toppings or -1 to go back.");
+        int toppingChoice;
+
+        do {
+            toppingChoice = scanner.nextInt();
+            scanner.nextLine();
+
+            if (toppingChoice == -1) {
+                System.out.println("Going back...");
+                return;
+            }
+
+            switch (toppingChoice) {
+                case 1 -> toppings.add(Sandwich.RegularTopping.LETTUCE);
+                case 2 -> toppings.add(Sandwich.RegularTopping.PEPPERS);
+                case 3 -> toppings.add(Sandwich.RegularTopping.ONIONS);
+                case 4 -> toppings.add(Sandwich.RegularTopping.TOMATOES);
+                case 5 -> toppings.add(Sandwich.RegularTopping.JALAPENOS);
+                case 6 -> toppings.add(Sandwich.RegularTopping.CUCUMBERS);
+                case 7 -> toppings.add(Sandwich.RegularTopping.PICKLES);
+                case 8 -> toppings.add(Sandwich.RegularTopping.GUACAMOLE);
+                case 9 -> toppings.add(Sandwich.RegularTopping.MUSHROOMS);
+                case 0 -> System.out.println("Done selecting toppings.");
+                default -> System.out.println("Invalid choice, try again.");
+            }
+        } while (toppingChoice != 0);
+
+        boolean addingSauces = true;
+        while (addingSauces) {
+            System.out.println("Choose a sauce to add:");
+            System.out.println("1) MAYO  2) MUSTARD  3) KETCHUP  4) RANCH  5) THOUSAND ISLANDS  6) VINAIGRETTE");
+            System.out.println("0) Done adding sauces");
+
+            int sauceChoice = scanner.nextInt();
+            scanner.nextLine();
+
+            if (sauceChoice == -1) {
+                System.out.println("Going back...");
+                return;
+            }
+
+            Sandwich.SauceOption selectedSauce = switch (sauceChoice) {
+                case 1 -> Sandwich.SauceOption.MAYO;
+                case 2 -> Sandwich.SauceOption.MUSTARD;
+                case 3 -> Sandwich.SauceOption.KETCHUP;
+                case 4 -> Sandwich.SauceOption.RANCH;
+                case 5 -> Sandwich.SauceOption.THOUSAND_ISLANDS;
+                case 6 -> Sandwich.SauceOption.VINAIGRETTE;
+                case 0 -> {
+                    addingSauces = false;
+                    yield null;
+                }
+                default -> {
+                    System.out.println("Invalid sauce choice.");
+                    yield null;
+                }
+            };
+
+            if (selectedSauce != null && !saucesOption.contains(selectedSauce)) {
+                saucesOption.add(selectedSauce);
+                System.out.println(selectedSauce + " added!");
+            } else if (selectedSauce != null) {
+                System.out.println("You already added that sauce.");
+            }
+        }
         int input;
         do {
             System.out.println("\n----------------------------------------");
@@ -208,17 +415,10 @@ public class UserInterface {
             System.out.println("- Meat: " + currentSandwichMeat + (currentSandwichExtraMeat ? "(EXTRA)" : ""));
             System.out.println("- Cheese: " + currentSandwichCheese + (currentSandwichExtraCheese ? " (Extra)" : ""));
             System.out.println("- Toasted: " + (currentSandwichToasted ? "Yes" : "No"));
-            System.out.println("- Toppings: " + regularToppings);
-            System.out.println("- Sauces: " + sauces);
+            System.out.println("- Toppings: " + toppings);
+            System.out.println("- Sauces: " + saucesOption);
             System.out.println("----------------------------------------");
-            System.out.println("1) Choose Size");
-            System.out.println("2) Choose Bread Type");
-            System.out.println("3) Choose Meat");
-            System.out.println("4) Choose Cheese");
-            System.out.println("5) Add/Remove Regular Toppings");
-            System.out.println("6) Add/Remove Sauces");
-            System.out.println("7) Toggle Toasted");
-            System.out.println("8) Add Sandwich to Order");
+            System.out.println("1) Add Sandwich to Order");
             System.out.println("0) Cancel and Go Back");
             System.out.print("Your choice: ");
 
@@ -227,18 +427,41 @@ public class UserInterface {
 
             switch (input) {
                 case 1:
-                    System.out.println("Choose a sandwich size: ");
-                    System.out.println("1) SMALL (4\")");
-                    System.out.println("2) MEDIUM (8\")");
-                    System.out.println("3) LARGE (12\")");
-                    System.out.print("Enter option: ");
+                    assert currentSize != null;
+                    Sandwich sandwich = new Sandwich(
 
-                    int sizeChoice = scanner.nextInt();
-                    scanner.nextLine();
+                            currentSize,
+                            currentSandwichBreadType,
+                            currentSandwichMeat,
+                            currentSandwichExtraMeat,
+                            currentSandwichCheese,
+                            currentSandwichExtraCheese,
+                            currentSandwichToasted,
+                            toppings.toString(),
+                            saucesOption.toString(),
+                            currentSize.getBreadPrice(),
+                            currentSize.getMeatPrice(),
+                            currentSize.getCheesePrice(),
+                            currentSize.getExtraMeatPrice(),
+                            currentSize.getExtraCheesePrice()
+                    );
 
+                    order.addProduct(sandwich);
+                    System.out.println("Custom sandwich added to order!");
+                    input = 0;
+                    break;
 
+                case 0:
+                    System.out.println("Cancelled sandwich creation. Have a DELI-cious Day!");
+                    break;
+
+                default:
+                    System.out.println("Invalid option. Please try again.");
             }
         } while (input != 0);
+
+        System.out.println("Custom sandwich added to order!");
+
     }
 
     private void checkingOut() {
