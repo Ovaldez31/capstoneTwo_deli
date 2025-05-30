@@ -33,16 +33,21 @@ public class Order {
     }
 
     public void printOrderSummary() {
-        System.out.println("\n --- ORDER SUMMARY --- \n");
+        System.out.println("\n========================================");
+        System.out.println("            🧾 ORDER SUMMARY 🧾          ");
+        System.out.println("========================================");
         System.out.println("Customer: " + customerName);
+        System.out.println("----------------------------------------");
+
         int count = 1;
         for (Product product : products) {
-            System.out.println("Item #" + count++);
+            System.out.printf("Item #%d\n", count++);
             System.out.println(product.getReceiptDescription());
-            System.out.println();
+            System.out.println("----------------------------------------");
         }
 
-        System.out.printf("Total: $%.2f%n", getTotal());
+        System.out.printf("TOTAL AMOUNT DUE: $%.2f%n", getTotal());
+        System.out.println("========================================\n");
     }
 
 }

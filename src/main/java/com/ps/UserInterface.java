@@ -62,7 +62,7 @@ public class UserInterface {
             System.out.println("2) Add Drink");
             System.out.println("3) Add Chips");
             System.out.println("4) View Current Order / Checkout");
-            System.out.println("0) Cancel Order (Return to Main Menu)");
+            System.out.println("0) Cancel Order (Return to Home Page)");
             System.out.println("----------------------------------------");
             System.out.print("Choose an option: ");
 
