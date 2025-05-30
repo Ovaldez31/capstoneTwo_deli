@@ -370,7 +370,7 @@ public class UserInterface {
         boolean addingSauces = true;
         while (addingSauces) {
             System.out.println("Choose a sauce to add:");
-            System.out.println("1) MAYO  2) MUSTARD  3) KETCHUP  4) RANCH  5) THOUSAND ISLANDS  6) VINAIGRETTE");
+            System.out.println(" 1) AU JUS  2) MAYO  3) MUSTARD  4) KETCHUP  5) RANCH  6) THOUSAND ISLANDS  7) VINAIGRETTE");
             System.out.println("0) Done adding sauces");
 
             int sauceChoice = scanner.nextInt();
@@ -382,12 +382,13 @@ public class UserInterface {
             }
 
             Sandwich.SauceOption selectedSauce = switch (sauceChoice) {
-                case 1 -> Sandwich.SauceOption.MAYO;
-                case 2 -> Sandwich.SauceOption.MUSTARD;
-                case 3 -> Sandwich.SauceOption.KETCHUP;
-                case 4 -> Sandwich.SauceOption.RANCH;
-                case 5 -> Sandwich.SauceOption.THOUSAND_ISLANDS;
-                case 6 -> Sandwich.SauceOption.VINAIGRETTE;
+                case 1 -> Sandwich.SauceOption.AU_JUS;
+                case 2 -> Sandwich.SauceOption.MAYO;
+                case 3 -> Sandwich.SauceOption.MUSTARD;
+                case 4 -> Sandwich.SauceOption.KETCHUP;
+                case 5 -> Sandwich.SauceOption.RANCH;
+                case 6 -> Sandwich.SauceOption.THOUSAND_ISLANDS;
+                case 7 -> Sandwich.SauceOption.VINAIGRETTE;
                 case 0 -> {
                     addingSauces = false;
                     yield null;

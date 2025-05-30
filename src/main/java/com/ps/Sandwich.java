@@ -104,7 +104,7 @@ public class Sandwich implements Product {
     }
 
     public enum SauceOption {
-        MAYO, MUSTARD, KETCHUP, RANCH, THOUSAND_ISLANDS, VINAIGRETTE;
+        AU_JUS, MAYO, MUSTARD, KETCHUP, RANCH, THOUSAND_ISLANDS, VINAIGRETTE;
     }
 
 
